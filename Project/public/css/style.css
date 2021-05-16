@@ -1,0 +1,325 @@
+* {box-sizing:border-box}
+
+body {
+  background-color: #333333;
+}
+
+/* Slideshow container */
+.slideshow-container {
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+  height: 500px;
+  position: relative;
+  margin: auto;
+  width: 80%;
+  vertical-align:middle;
+}
+
+/* Hide the images by default */
+.slides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 50px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.slidetext {
+  color: #f2f2f2;
+  font-size: 30px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 20px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+.banner{
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #85b0cc;
+  font-size: 40px;
+  color: white;
+  height: 100px;
+  border-bottom-style: solid;
+  border-color: #b5656d;
+  border-width: 5px
+}
+.menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color:#efb9c0;
+}
+.navi {
+  float: left;
+
+}
+
+.naviLink {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 20px 26px;
+  text-decoration: none;
+  font-size: 20px
+}
+
+.naviLink:hover:not(.active) {
+  background-color: #111;
+}
+
+.active{
+  background-color: #b5656d
+}
+
+.footer{
+  list-style-type: none;
+  margin: 0;
+  padding: 0 200px;
+  overflow: hidden;
+  background-color: #85b0cc;
+  clear: both;
+}
+
+.foot{
+  float: left;
+  padding: 30px 50px
+}
+.foot:last-child {
+  float: right;
+}
+
+.socialLink{
+  display: block;
+  color: #FFF;
+  text-align: center;
+  padding: 20px 26px;
+  text-decoration: none;
+  font-size: 25px;
+  border-style: solid;
+  border-color: #b5656d;
+  border-width: 5px
+}
+
+.socialLink:hover {
+  background-color: #b5656d;
+}
+
+.intro {
+  color: #000000;
+  font-size: 25px;
+  padding: 8px 12px;
+  bottom: 8px;
+  width: 100%;
+}
+
+.aboutImg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+
+.show {
+  color: #f2f2f2;
+  font-size: 25px;
+  padding: 8px 12px;
+}
+
+.submit{
+  width: 15em;  
+  height: 2em;
+
+}
+
+.comments{
+  padding: 50px;
+}
+
+.direct{
+  padding: 50px;
+}
+
+
+.cm{
+  border-top-style: double;
+  border-color: #b5656d;
+  border-width: 5px;
+  color: #f2f2f2;
+  font-size: 25px;
+  padding: 50px 12px;
+}
+
+
+/* Header/Blog Title */
+.header {
+  padding: 30px;
+  font-size: 40px;
+  text-align: center;
+  background: #ddd;
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+  float: left;
+  width: 75%;
+}
+
+/* Right column */
+.rightcolumn {
+  float: left;
+  width: 25%;
+  padding-left: 20px;
+}
+
+/* Fake image */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+  background-color: white;
+  padding: 20px;
+  margin-top: 20px;
+  width: 400px;
+  height: 450px;
+  float: left;
+  border-color: black;
+  border-style: solid;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Footer */
+.bfooter {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+  margin-top: 20px;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.experience {
+  display: none
+}
+/*
+.hoverWork:hover + .experience {
+  display:block;
+}*/
+
+
+.project {
+  display: none
+}
+
+.showButton{
+  background-color: #b5656d;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  float:right;
+}
+
+.hint{
+  color:white;
+  padding: 20px 40px;
+  font-size:20px;
+  display: none
+}
+
+.show:hover + .hint{
+  display:block;
+}

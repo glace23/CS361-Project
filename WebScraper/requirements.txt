@@ -1,0 +1,11 @@
+###### Requirements without Version Specifiers ######`
+beautifulsoup4
+requests
+flask_restful
+pandas
+lxml
+
+###### Requirements with Version Specifiers ######
+flask==1.1.2
+flask_cors==3.0.10
+

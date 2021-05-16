@@ -1,0 +1,5 @@
+/.idea/*
+/__pycache__/*
+/WebScraper/.idea/*
+/WebScraper/__pycache__/*
+/WebScraper/venv/*
