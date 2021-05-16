@@ -31,7 +31,7 @@ class Tax(Resource):
         if tax_data == 300:
             return 'Main Page is not found', 404
         elif tax_data == 350:
-            return 'City Page is not found', 404
+            return 'Tax table is not found', 404
         elif tax_data == 250:
             # City does not exist, return state tax data
             return data.get_state_rate(state), 230
@@ -233,4 +233,4 @@ class TaxScraper:
 
 
 if __name__ == '__main__':
-    print(TaxScraper('Seattle', 'WA').find_state_rates())
+    print(TaxScraper('Seattle', 'WA').find_rate())
