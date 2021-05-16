@@ -10,6 +10,12 @@ Send data in json format via post request:
   'city':'seattle'
   'state':'wa'
 }
+
+"city": str
+  the name of the city
+"state": str
+  two letter abbreviation of the name of the state
+  
 ```
 
 Returns
@@ -38,6 +44,44 @@ Response:
   "Area Code": "206",
   "Website": "Seattle.gov "
 }
+
+"City": str
+  name of the city
+"Country": str
+  name of the country where the city is located
+"State": str
+  name of the state where the city is located
+"County": str
+  name of the county where the city is located
+"Founded": str
+  date when the city is founded
+"Named for": str
+  what the city is named after
+"Mayor": str
+  name of the mayor, may have party affliation after name
+"Area": str
+  area of the city proper
+"Elevation": str
+  elevation of the city
+"Population": str
+  population of the city proper
+"Rank": str
+  the rank of the city based on population
+"Density": str
+  the density of the city in units of 'people per square miles'
+"Population_Metro": str
+  the population of the metro area where the city is located in
+"Demonym(s)": str
+  demonyms of the people of the city
+"Time Zone": str
+  the time zone of the city
+"ZIP Codes": str
+  zipcodes of the city in format 10000-99999 (10000 to 99999)
+"Area Code": str
+  area code of the city
+"Website": str
+  url of city website
+
 ```
 
 If unable to find page
@@ -58,6 +102,12 @@ Send data in json format via post request:
   'city':'seattle'
   'state':'wa'
 }
+
+"city": str
+  the name of the city
+"state": str
+  two letter abbreviation of the name of the state
+  
 ```
 
 Returns
@@ -72,6 +122,15 @@ Response:
   "county": 3.6,
   "total": 10.25
 }
+
+"state": float
+  state tax rate
+"city": float
+  city tax rate
+"county": float
+  county tax rate
+"total": float
+  combined tax rate
 ```
 
 If unable to find page
@@ -106,7 +165,12 @@ Send data in json format via post request:
   'text': 3
 }
 
-'text' default is set to 2
+"city": str
+  the name of the city
+"state": str
+  two letter abbreviation of the name of the state
+"text": int
+  number of paragraphs will be scraped, default is set to 2
 ```
 
 Returns
@@ -121,6 +185,9 @@ Response:
 "paragraph2": "Seattle is situated on an isthmus between Puget Sound (an inlet of the Pacific Ocean) and Lake Washington. It is the northern largest city in the United States, located about 100 miles (160 km) south of the Canadian border. A major gateway for trade with northern Asia, Seattle is the fourth-largest port in North America in terms of container handling as of 2015[update].[13] ",
 "paragraph3": "The Seattle area was inhabited by Native Americans for at least 4,000 years before the first permanent European settlers.[14] Arthur A. Denny and his group of travelers, subsequently known as the Denny Party, arrived from Illinois via Portland, Oregon, on the schooner Exact at Alki Point on November 13, 1851.[15] The settlement was moved to the eastern shore of Elliott Bay and named "Seattle" in 1852, in honor of Chief Si'ahl of the local Duwamish and Suquamish tribes. Today, Seattle has high populations of Native, Scandinavian, Asian American and African American people, as well as a thriving LGBT community that ranks sixth in the United States by population.[16] "
 }
+
+paragraphX: str
+  text content of paragraph
 ```
 
 If unable to find page
