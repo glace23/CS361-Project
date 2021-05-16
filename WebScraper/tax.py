@@ -7,7 +7,15 @@ from flask import request as flareq
 
 
 class Tax(Resource):
-    """Returns """
+    """
+    Resource class for TaxScraper
+    ...
+
+    post()
+        returns city data in json format or a string via post request
+
+    """
+
     def post(self):
         req = flareq.get_json()
         city = ''
@@ -25,12 +33,40 @@ class Tax(Resource):
         elif tax_data == 350:
             return 'City Page is not found', 404
         elif tax_data == 250:
+            # City does not exist, return state tax data
             return data.get_state_rate(state), 230
 
         return tax_data, 201
 
 
 class TaxScraper:
+    """
+        A class represents scraped taxes of a city from website.
+
+        ...
+
+        Attributes:
+        -----------
+        city: str
+            the name of the city
+        state: str
+            the two letter abbreviation of the state
+
+        Methods:
+        --------
+        fill_rate()
+            fills city rate data in a dict format
+
+        get_page(page, city=None, State=None)
+            returns the webpage from website
+
+        find_state_rate()
+            finds state rate of parameter
+
+        get_text()
+            returns paragraph
+
+        """
     def __init__(self, city, state):
         self.city = city.strip()
         self.state = state.strip()
@@ -42,6 +78,7 @@ class TaxScraper:
         self.rate_data = {'state': 0.0, 'city': 0.0, 'county': 0.0, 'total': 0.0}
 
     def find_rate(self):
+        """Finds rate data for state and city"""
         if self.check_dc(self.state):
             return self.rate_data
 
@@ -79,6 +116,7 @@ class TaxScraper:
         return self.rate_data
 
     def find_state_rates(self):
+        """Finds state rate data"""
         tax_page = self.get_page(self.page)
         if tax_page is False:
             return False
@@ -99,9 +137,11 @@ class TaxScraper:
         return True
 
     def get_state_rate(self, state):
+        """Returns state rate"""
         return self.state_rates[state.upper()]
 
     def check_dc(self, state):
+        """Checks if state is D.C."""
         if state.lower() == 'dc':
             self.rate_data['city'] = 6.0
             self.rate_data['total'] = 6.0
@@ -109,6 +149,7 @@ class TaxScraper:
         return False
 
     def get_state_name(self, state):
+        """Gets state full name from abbreviation"""
         state_list = {
             "AL": "Alabama",
             "AK": "Alaska",
@@ -173,6 +214,7 @@ class TaxScraper:
         return state_list[state.upper()]
 
     def get_page(self, page, city='', state=''):
+        """Gets web page from website"""
         # remove front and end white space
         city = city.strip()
         # capitalize all words

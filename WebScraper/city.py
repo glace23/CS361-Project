@@ -8,7 +8,7 @@ from flask import request as flareq
 
 class City(Resource):
     """
-    Resource class for City
+    Resource class for CityScraper
     ...
 
     post()
@@ -18,15 +18,17 @@ class City(Resource):
     """
 
     def post(self):
-        """
-        Sends city data as json via post request
-        """
         req = flareq.get_json()
-        print(req)
         city = req['city']
         state = req['state']
-        city_data = CityScraper(city, state).fill_city_data()
-        return city_data, 201
+        city_data = CityScraper(city, state)
+        city_response = city_data.fill_city_data()
+        if city_response == 300:
+            return 'City page does not exist', 404
+        elif city_response == 250:
+            return 'City table does not exist', 404
+
+        return city_response, 201
 
 
 class CityScraper:
@@ -97,6 +99,19 @@ class CityScraper:
         self.city_key = {}
 
     def fill_city_data(self):
+        """
+        fills city_key dict and return corresponding code
+
+        Returns:
+        --------
+            300:
+                Web Page does not exist
+            250:
+                City table does not exist
+            200:
+                Successfully updated city_key
+
+        """
         city_page = self.get_page(self.page, self.city, self.state)
         if city_page is False:
             return 300
@@ -111,9 +126,14 @@ class CityScraper:
 
         for i in range(len(self.city_label)):
             self.city_key[self.city_label[i]] = self.city_data[i]
-        return 200
+        return self.city_key
+
+    def get_city_key(self):
+        """Return city_key"""
+        return self.city_key
 
     def get_page(self, page, city=None, state=None):
+        """Gets city web page"""
         # remove front and end white space
         city = city.strip()
         # capitalize all words
@@ -130,6 +150,7 @@ class CityScraper:
             return False
 
     def _search_labels(self, city_info_table):
+        """Searches for data and labels in city info table"""
         for element in city_info_table.find_all(class_="infobox-label"):
             # Add header, if element has bullet point and element.parent.previous sibling does not have bullet point
             if chr(8226) not in element.parent.find_previous_sibling().text and chr(8226) in element.text:
@@ -154,12 +175,14 @@ class CityScraper:
             self.data_list.append(data)
 
     def _add_labels(self):
+        """Add label to city_data and data to data_list"""
         for i in range(len(self.city_label)):
             for j in range(len(self.label_list)):
                 if self.city_label[i].lower() == self.label_list[j].lower():
                     self.city_data[i] = self.data_list[j]
 
     def _find_index(self):
+        """Find and transform data found in label list and data list"""
         founded = []
         government = []
         population = []
@@ -193,6 +216,7 @@ class CityScraper:
         self._find_area(area)
 
     def _find_founded(self, founded):
+        """Transform data for label 'founded'"""
         for i in founded:
             if 'founded' == self.label_list[i].lower():
                 self.city_data[4] = self.data_list[i]
@@ -205,12 +229,14 @@ class CityScraper:
                 return
 
     def _find_mayor(self, government):
+        """Transform data for label 'mayor'"""
         for i in government:
             if 'mayor' in self.label_list[i].lower():
                 self.city_data[6] = self.data_list[i]
                 return
 
     def _find_population(self, population):
+        """Transform data for label 'population'"""
         for i in population:
             if 'estimate' in self.label_list[i].lower() or 'population' == self.label_list[i].lower():
                 if ' ' in self.data_list[i]:
@@ -228,6 +254,7 @@ class CityScraper:
                 self.city_data[12] = self.data_list[i][:self.data_list[i].index(' ')]
 
     def _find_area(self, area):
+        """Transform data for label 'area'"""
         for i in area:
             area_data = self.data_list[i][:self.data_list[i].index(' ')]
             if 'city' in self.label_list[i].lower() or 'total' in self.label_list[i].lower() or 'area' == \
@@ -237,21 +264,26 @@ class CityScraper:
                 return
 
     def _find_zip(self, zipcode):
+        """Transform data for label 'zipcode'"""
         if len(self.data_list[zipcode]) > 5:
             modded_zipcode = re.sub("\D", "", self.data_list[zipcode])
             self.city_data[15] = modded_zipcode[:5] + '-' + modded_zipcode[-5:]
 
     def _find_elevation(self, elevation):
+        """Transform data for label 'elevation'"""
         self.city_data[8] = self.data_list[elevation][:self.data_list[elevation].index('ft')]
 
     def _find_demonym(self, demonym):
+        """Transform data for label 'demonym'"""
         self.city_data[13] = self.data_list[demonym].replace(' or', ',')
 
     def _find_time(self, timezone):
+        """Transform data for label 'timezone'"""
         self.city_data[14] = self.data_list[timezone][:self.data_list[timezone].index(' ')]
         self.city_data[14] = self.city_data[14].replace(chr(8722), '-')
 
     def _find_county(self, county):
+        """Transform data for label 'county'"""
         counties = self.data_list[county]
         while '(' in counties:
             counties = counties[:counties.index('(')] + counties[counties.index(')') + 1:]
@@ -264,6 +296,7 @@ class CityScraper:
         self.city_data[3] = county_data
 
     def _find_area_code(self, area_code):
+        """Transform data for label 'area code'"""
         code = self.data_list[area_code]
         if 'and' in code:
             code = code.replace(' and', ',')
