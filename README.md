@@ -97,7 +97,7 @@ Response:
   "total": 6.5
 }
 ```
-### Tax Data Scraper - url/citytextdata
+### City Text Scraper - url/citytextdata
 Send data in json format via post request:
 ```
 {
