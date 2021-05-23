@@ -32,7 +32,7 @@ function Button(){
 
         } 
         else {
-          document.getElementById('data').textContent = "Error in network request: ";
+          document.getElementById('data').textContent = JSON.parse(xml.responseText);
         }
     });
     xml.send(JSON.stringify(text));
