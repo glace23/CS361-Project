@@ -35,6 +35,18 @@ function showSlides(n, check=false) {
   }
 }
 
+function addCity(){
+  document.getElementById("add").disabled = true;
+  document.getElementById("add").setAttribute('value', 'Sending Data...')
+  var t0 = performance.now()
+  Button()
+  var t1 = performance.now()
+  setTimeout(function(){
+    document.getElementById("add").disabled = false;
+    document.getElementById("add").setAttribute('value', 'Add')
+  }, (t1-t0)*1000);
+
+}
 
 counter = 0
 function Button(){
@@ -65,7 +77,7 @@ function Button(){
 
 
           if (typeof response != 'string'){
-            var t = document.createTextNode(city.charAt(0).toUpperCase() + city.slice(1) + ', ' + state);
+            var t = document.createTextNode(city.toUpperCase() + ', ' + state);
             Object.keys(response).forEach(function(key) {
               if (response[key] != null && key != 'City'){
                 var li = document.createElement('li');
@@ -109,11 +121,14 @@ function Button(){
           div.appendChild(ul);
           div.appendChild(deleteButton)
           table.insertBefore(div, table.firstChild)
+
         }
     });
     xml.send(JSON.stringify(text));
     event.preventDefault();
 }
+
+
 
 
 function Language(language, text){
