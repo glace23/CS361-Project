@@ -1,11 +1,16 @@
 <form>
 <fieldset>
-  <legend class="show">Add a city!</legend>
+  <legend class="tooltip">Add a city!
+    <span class="tooltiptext">
+    <p>Add a city and a state, you will see a break down of sales tax in City, County, State</p>
+    <p>If the city you entered does not exist, the application prompt you and only show a State sales tax</p>
+    </span>
+  </legend>
   <label class="show" for="username">City:
       <input type="text" name="city" id="city">
   </label>
   <label class="show" for="comment">State:
-      <select name="state" id="state" style="font-size:25px">
+      <select name="state" id="state" style="font-size:25px" onchange="checkDC(event)">
         <option value="AL">AL</option>
         <option value="AK">AK</option>
         <option value="AR">AR</option>  
@@ -70,7 +75,15 @@
 
 <form>
 <fieldset>
-<legend class="show">Tax Calculator</legend>
+<legend class="tooltip">Tax Calculator
+    <span class="tooltiptext">
+    <p>Dollar Amount must be larger than 0.</p>
+    <p>Sales Tax rate will be pre-populated</p>
+    <p>Modes:
+    <br>Excluding Taxes: Assumes the amount you entered does not include sales tax.</br> 
+    <br>Including Taxes: Assumes the amount you entered includes sales tax.</br></p>
+    </span>
+</legend>
   <label class="show">Dollar Amount: $
       <input type="number" name="amount" id="amount">
   </label>

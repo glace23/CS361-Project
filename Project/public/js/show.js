@@ -1,8 +1,21 @@
-cityRate = 0
-countyRate = 0
-stateRate = 0
-counter = 0
-name = ""
+var cityRate = 0
+var countyRate = 0
+var stateRate = 0
+var counter = 0
+var name = ""
+
+function checkDC(event){
+  if(event.target.value == 'DC'){
+    document.getElementById("city").setAttribute('value', 'Washington')
+    document.getElementById("city").disabled = true;
+  }
+  else{
+    document.getElementById("city").setAttribute('value', '')
+    document.getElementById("city").disabled = false;
+  }
+}
+
+
 
 function addCity(){
   document.getElementById("add").disabled = true;
@@ -12,7 +25,6 @@ function addCity(){
   var t1 = performance.now()
   setTimeout(function(){
     document.getElementById("add").disabled = false;
-    document.getElementById("calculate").disabled = false;
     document.getElementById("add").setAttribute('value', 'Add')
   }, (t1-t0)*1000);
 
@@ -23,6 +35,9 @@ function Button(){
     let text = {city:null, state:null};
     let city = document.getElementById('city').value;
     let state = document.getElementById('state').value;
+    if(state == 'DC'){
+      city = 'Washington'
+    }
     text.city = city
     text.state = state
     xml.open('POST', 'http://127.0.0.1:5000/taxdata', true);
@@ -30,6 +45,8 @@ function Button(){
     xml.addEventListener('load', function(){
         if(xml.status >= 200 && xml.status < 400){
           var response = JSON.parse(xml.responseText);
+          // enable calculate button only if xml status is good
+          document.getElementById("calculate").disabled = false;
           let total = 0;
           name = city.toUpperCase() + ', ' + state;
           let rates = name + ': \r\n';
@@ -61,12 +78,9 @@ function Button(){
             document.getElementById('showtax').textContent = 'City does not exist, showing state tax rate instead. \r\n> State: ' + total + '%';
 
           }
-
-
-
         } 
         else {
-          document.getElementById('data').textContent = JSON.parse(xml.responseText);
+          document.getElementById('showtax').textContent = JSON.parse(xml.responseText);
         }
     });
 

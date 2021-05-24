@@ -38,27 +38,6 @@ app.get('/homescript', function(req, res){
     res.sendFile("slide.js", options);
 });
 
-app.get('/images/5',  function(req, res){
-  var options = { 
-        root: path.join(__dirname + "/public/images") 
-    }; 
-  res.sendFile("5.jpg", options);
-});
-
-app.get('/images/6',  function(req, res){
-  var options = { 
-        root: path.join(__dirname + "/public/images") 
-    }; 
-  res.sendFile("6.jpg", options);
-});
-
-app.get('/images/7',  function(req, res){
-  var options = { 
-        root: path.join(__dirname + "/public/images") 
-    }; 
-  res.sendFile("7.jpg", options);
-});
-
 app.get('/',function(req,res){
 
   for (var name in req.query){

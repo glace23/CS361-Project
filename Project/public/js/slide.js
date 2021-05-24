@@ -1,37 +1,13 @@
-var slideIndex = 1;
-showSlides(slideIndex);
+var counter = 0
 
-// Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n, true);
-}
-
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides(slideIndex = n, true);
-}
-
-function showSlides(n, check=false) {
-  var i;
-  var slides = document.getElementsByClassName("slides");
-  var dots = document.getElementsByClassName("dot");
-  // scroll back to first index
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-    //block all slides from showing
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
+function checkDC(event){
+  if(event.target.value == 'DC'){
+    document.getElementById("city").setAttribute('value', 'Washington')
+    document.getElementById("city").disabled = true;
   }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
-  // show slide at index -1
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-
-  // auto slide
-  if (check == false){
-    setTimeout(function(){showSlides(slideIndex += 1)}, 10000)
+  else{
+    document.getElementById("city").setAttribute('value', '')
+    document.getElementById("city").disabled = false;
   }
 }
 
@@ -45,16 +21,18 @@ function addCity(){
     document.getElementById("add").disabled = false;
     document.getElementById("add").setAttribute('value', 'Add')
   }, (t1-t0)*1000);
-
 }
 
-counter = 0
+
 function Button(){
     var xml = new XMLHttpRequest();
     let text = {city:null, state:null};
     let city = document.getElementById('city').value;
     let state = document.getElementById('state').value;
     let language = document.getElementById('language').value;
+    if(state == 'DC'){
+      city = 'Washington'
+    }
     text.city = city
     text.state = state
     counter = counter + 1
