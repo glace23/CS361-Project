@@ -1,111 +1,128 @@
-<form>
-<fieldset>
-  <legend class="tooltip">Add a city!
-    <span class="tooltiptext">
-    <p>Add a city and a state, you will see a break down of sales tax in City, County, State</p>
-    <p>If the city you entered does not exist, the application prompt you and only show a State sales tax</p>
-    </span>
-  </legend>
-  <label class="show" for="username">City:
-      <input type="text" name="city" id="city">
-  </label>
-  <label class="show" for="comment">State:
-      <select name="state" id="state" style="font-size:25px" onchange="checkDC(event)">
-        <option value="AL">AL</option>
-        <option value="AK">AK</option>
-        <option value="AR">AR</option>  
-        <option value="AZ">AZ</option>
-        <option value="CA">CA</option>
-        <option value="CO">CO</option>
-        <option value="CT">CT</option>
-        <option value="DC">DC</option>
-        <option value="DE">DE</option>
-        <option value="FL">FL</option>
-        <option value="GA">GA</option>
-        <option value="HI">HI</option>
-        <option value="IA">IA</option>  
-        <option value="ID">ID</option>
-        <option value="IL">IL</option>
-        <option value="IN">IN</option>
-        <option value="KS">KS</option>
-        <option value="KY">KY</option>
-        <option value="LA">LA</option>
-        <option value="MA">MA</option>
-        <option value="MD">MD</option>
-        <option value="ME">ME</option>
-        <option value="MI">MI</option>
-        <option value="MN">MN</option>
-        <option value="MO">MO</option>  
-        <option value="MS">MS</option>
-        <option value="MT">MT</option>
-        <option value="NC">NC</option>  
-        <option value="NE">NE</option>
-        <option value="NH">NH</option>
-        <option value="NJ">NJ</option>
-        <option value="NM">NM</option>      
-        <option value="NV">NV</option>
-        <option value="NY">NY</option>
-        <option value="ND">ND</option>
-        <option value="OH">OH</option>
-        <option value="OK">OK</option>
-        <option value="OR">OR</option>
-        <option value="PA">PA</option>
-        <option value="RI">RI</option>
-        <option value="SC">SC</option>
-        <option value="SD">SD</option>
-        <option value="TN">TN</option>
-        <option value="TX">TX</option>
-        <option value="UT">UT</option>
-        <option value="VT">VT</option>
-        <option value="VA">VA</option>
-        <option value="WA">WA</option>
-        <option value="WI">WI</option>  
-        <option value="WV">WV</option>
-        <option value="WY">WY</option>
-    </select>
-  </label>
-  <br>
-  <br>
-  <input type="button" id="add" value = "Add" class="add" onclick="addCity()">
-</fieldset>
-</form>
+<button id='modeChange' class="showButton" onclick = "changeMode()">Custom</button>
+<div id='cityMode'>
+  <form>
+  <fieldset>
+    <legend class="tooltip">Add a city!
+      <span class="tooltiptext">
+      <p>Add a city and a state, you will see a break down of sales tax in City, County, State</p>
+      <p>If the city you entered does not exist, the application prompt you and only show a State sales tax</p>
+      </span>
+    </legend>
+    <label class="show">City:
+        <input type="text" name="city" id="city">
+    </label>
+    <label class="show">State:
+        <select name="state" id="state" style="font-size:25px" onchange="checkDC(event)">
+          <option value="AL">AL</option>
+          <option value="AK">AK</option>
+          <option value="AR">AR</option>  
+          <option value="AZ">AZ</option>
+          <option value="CA">CA</option>
+          <option value="CO">CO</option>
+          <option value="CT">CT</option>
+          <option value="DC">DC</option>
+          <option value="DE">DE</option>
+          <option value="FL">FL</option>
+          <option value="GA">GA</option>
+          <option value="HI">HI</option>
+          <option value="IA">IA</option>  
+          <option value="ID">ID</option>
+          <option value="IL">IL</option>
+          <option value="IN">IN</option>
+          <option value="KS">KS</option>
+          <option value="KY">KY</option>
+          <option value="LA">LA</option>
+          <option value="MA">MA</option>
+          <option value="MD">MD</option>
+          <option value="ME">ME</option>
+          <option value="MI">MI</option>
+          <option value="MN">MN</option>
+          <option value="MO">MO</option>  
+          <option value="MS">MS</option>
+          <option value="MT">MT</option>
+          <option value="NC">NC</option>  
+          <option value="NE">NE</option>
+          <option value="NH">NH</option>
+          <option value="NJ">NJ</option>
+          <option value="NM">NM</option>      
+          <option value="NV">NV</option>
+          <option value="NY">NY</option>
+          <option value="ND">ND</option>
+          <option value="OH">OH</option>
+          <option value="OK">OK</option>
+          <option value="OR">OR</option>
+          <option value="PA">PA</option>
+          <option value="RI">RI</option>
+          <option value="SC">SC</option>
+          <option value="SD">SD</option>
+          <option value="TN">TN</option>
+          <option value="TX">TX</option>
+          <option value="UT">UT</option>
+          <option value="VT">VT</option>
+          <option value="VA">VA</option>
+          <option value="WA">WA</option>
+          <option value="WI">WI</option>  
+          <option value="WV">WV</option>
+          <option value="WY">WY</option>
+      </select>
+    </label>
+    <br>
+    <br>
+    <input type="button" id="add" value = "Add" class="add" onclick="addCity()">
+  </fieldset>
+  </form>
 
-<p id='showtax' class ='banner' style="background-color:#FFF; color:black; font-size:20px; white-space: pre;"></p>
-
-
-<form>
-<fieldset>
-<legend class="tooltip">Tax Calculator
-    <span class="tooltiptext">
-    <p>Dollar Amount must be larger than 0.</p>
-    <p>Sales Tax rate will be pre-populated</p>
-    <p>Modes:
-    <br>Excluding Taxes: Assumes the amount you entered does not include sales tax.</br> 
-    <br>Including Taxes: Assumes the amount you entered includes sales tax.</br></p>
-    </span>
-</legend>
-  <label class="show">Dollar Amount: $
-      <input type="number" name="amount" id="amount">
-  </label>
-  <label class="show">Tax Rate:
-      <input type="number" name="rate" id="rate" disabled>
-      %
-  </label>
-    <label class="show" for="language">Mode:
-      <select id="mode" name="mode" style="font-size:25px">
-        <option value="Exclude">Exclude Tax</option>
-        <option value="Include">Include Tax</option>
-    </select>
-  </label>
-  <br>
-  <br>
-  <input type="button" id="calculate" value = "Calculate" class="add" onclick="Calculate()" disabled>
-  <input type="button" id="clear" value = "Clear Form" class="add" onclick="Clear()">
-</fieldset>
-</form>
-<div style="background-color:#FFF; color:black; font-size:20px; height:100px; border:solid;">
-<p id='calctax'></p>
-<p id='calctotal'></p>
+  <p id='showtax' class ='banner' style="background-color:#FFF; color:black; font-size:20px; white-space: pre;"></p>
 </div>
+
+  <form>
+  <fieldset>
+  <legend class="tooltip">Tax Calculator
+      <span class="tooltiptext">
+      <p>Dollar Amount must be larger than 0.</p>
+      <p>Sales Tax rate will be pre-populated</p>
+      <p>Modes:
+      <br>Excluding Taxes: Assumes the amount you entered does not include sales tax.</br> 
+      <br>Including Taxes: Assumes the amount you entered includes sales tax.</br></p>
+      </span>
+  </legend>
+    <label class="show">Dollar Amount: $
+        <input type="number" name="amount" id="amount">
+    </label>
+    <label class="show">Tax Rate:
+        <input type="number" name="rate" id="rate" disabled>
+        %
+    </label>
+      <label class="show" for="language">Mode:
+        <select id="mode" name="mode" style="font-size:25px">
+          <option value="Exclude">Exclude Tax</option>
+          <option value="Include">Include Tax</option>
+      </select>
+    </label>
+    <label for="advanced" class="show" id="advancedlabel" style="visibility:hidden">
+      <input type="checkbox" id="advanced" value="advanced" onclick="showAdvancedFunctions()">
+      Advancd Mode
+    </label>
+    <div id="advancedMode" style="display:none">
+        <label class="show">City Rate:
+        <input type="number" name="cityRate" id="cityRate">
+        %
+        </label>
+        <label class="show">County Rate:
+        <input type="number" name="countyRate" id="countyRate">
+        %
+        </label>
+        <label class="show">State Rate:
+        <input type="number" name="stateRate" id="stateRate">
+        %
+        </label>
+    </div>
+    <br>
+    <br>
+    <input type="button" id="calculate" value = "Calculate" class="add" onclick="Calculate()" disabled>
+    <input type="button" id="clear" value = "Clear Form" class="add" onclick="Clear()">
+  </fieldset>
+  </form>
+
 <div id ='info'></div>
  <script type="text/javascript" src="showscript"></script>

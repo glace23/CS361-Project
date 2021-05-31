@@ -152,7 +152,8 @@ class CityScraper:
     def _search_labels(self, city_info_table):
         """Searches for data and labels in city info table"""
         for element in city_info_table.find_all(class_="infobox-label"):
-            # Add header, if element has bullet point and element.parent.previous sibling does not have bullet point
+            # Add header, if element has bullet point and
+            # element.parent.previous sibling does not have bullet point
             if chr(8226) not in element.parent.find_previous_sibling().text and chr(8226) in element.text:
                 header = element.parent.find_previous_sibling().text
                 label = header.replace(u'\xa0', ' ').strip() + '_' + \

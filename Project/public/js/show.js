@@ -61,7 +61,8 @@ function Button(){
             countyRate = response['county'];
             stateRate = response['state'];
             total = response['total'];
-            rates += '> State Rate: ' + stateRate + '%\r\n' + '> County Rate: ' + countyRate + '%\r\n' + '> City Rate: ' + cityRate + '%\r\n' + '> Total Rate: ' + total + '%';
+            rates += '> State Rate: ' + stateRate + '%\r\n' + '> County Rate: ' + countyRate + '%\r\n' 
+                    + '> City Rate: ' + cityRate + '%\r\n' + '> Total Rate: ' + total + '%';
 
             document.getElementById('rate').value = total; 
             document.getElementById('showtax').textContent = rates;
@@ -90,6 +91,7 @@ function Button(){
 
 
 function Calculate(){
+  checkAdvancedRate()
   mode = document.getElementById('mode').value
   if (mode == 'Exclude'){
     CalcExlude()
@@ -102,12 +104,20 @@ function Calculate(){
 
 function CalcExlude(){
     var amount = document.getElementById('amount').value;
-    var rate = parseFloat(document.getElementById('rate').value)/100;
+    var rate = document.getElementById('rate').value
+
+    if (rate == '' || rate < 0){
+      alert('Rate is empty or negative!')
+      return
+    }
     counter = counter + 1
     if (amount == '' || amount <= 0){
       alert('Amount is empty or invalid!')
       return
     }
+
+    rate = parseFloat(rate)/100
+
     var table = document.getElementById('info');
     var div = document.createElement('div');
 
@@ -228,12 +238,20 @@ function CalcExlude(){
 
 function CalcInclude(){
     var amount = document.getElementById('amount').value;
-    var rate = parseFloat(document.getElementById('rate').value)/100;
+    var rate = document.getElementById('rate').value
+
+    if (rate == '' || rate < 0){
+      alert('Rate is empty or negative!')
+      return
+    }
     counter = counter + 1
     if (amount == '' || amount <= 0){
       alert('Amount is empty or invalid!')
       return
     }
+
+    rate = parseFloat(rate)/100
+
     var updatedAmount = (amount/(1+rate)).toFixed(2)
 
     var table = document.getElementById('info');
@@ -278,7 +296,6 @@ function CalcInclude(){
     var pSpace = document.createElement('p');
     var space = document.createTextNode(' \r\n');
     pSpace.appendChild(space);
-
 
     var deleteButton = document.createElement('input');
     deleteButton.setAttribute('value', 'Delete');
@@ -358,8 +375,14 @@ function Clear(){
   document.getElementById('showtax').textContent = '';
   document.getElementById('amount').value = '';
   document.getElementById('rate').value = '';
-  document.getElementById('calctax').textContent = '';
   document.getElementById("calculate").disabled = true;
+  document.getElementById('cityRate').value = '';
+  document.getElementById('countyRate').value = '';
+  document.getElementById('stateRate').value = '';
+  cityRate = 0
+  countyRate = 0
+  stateRate = 0
+  name = ""
 
 }
 
@@ -473,4 +496,58 @@ function ChangeValInclude(el){
   label.style.visibility = "hidden"
   var button = document.getElementById('changeButton' + el)
   button.style.visibility = "hidden"
+}
+
+
+
+function changeMode(){
+  element = document.getElementById('modeChange');
+  rateInput = document.getElementById('rate');
+  calculateButton = document.getElementById('calculate');
+  advancedLabel = document.getElementById('advancedlabel');
+  advancedCheckBox = document.getElementById('advanced');
+  Clear()
+  if (element.textContent == 'Custom'){
+    element.innerHTML = 'City';
+    name = 'Custom'
+    rateInput.disabled = false;
+    calculateButton.disabled = false;
+    advancedLabel.style.visibility = "visible";
+    hide = document.getElementById('cityMode');
+    hide.style.display = 'none'
+  } 
+  else if (element.textContent == 'City'){
+    element.innerHTML = 'Custom';
+    rateInput.disabled = true;
+    calculateButton = true;
+    advancedLabel.style.visibility = "hidden";
+    advancedCheckBox.checked = false;
+    show = document.getElementById('cityMode');
+    show.style.display = ''
+  } 
+}
+
+function showAdvancedFunctions(){
+  advancedCheckBox = document.getElementById('advanced');
+  advancedMode = document.getElementById('advancedMode');
+  rateInput = document.getElementById('rate');
+  if (advancedCheckBox.checked == true){
+    advancedMode.style.display = "";
+    rateInput.disabled = true;
+  }
+  else if (advancedCheckBox.checked == false){
+    advancedMode.style.display = "none";
+    rateInput.disabled = false;
+  }
+}
+
+function checkAdvancedRate(){
+  advancedCheckBox = document.getElementById('advanced');
+  if (advancedCheckBox.checked == true){
+    cityRate = parseFloat(document.getElementById('cityRate').value);
+    countyRate = parseFloat(document.getElementById('countyRate').value);
+    stateRate = parseFloat(document.getElementById('stateRate').value);
+    totalRate = cityRate + countyRate + stateRate;
+    document.getElementById('rate').value = totalRate;
+  }
 }

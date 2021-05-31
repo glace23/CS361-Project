@@ -80,11 +80,14 @@ function Button(){
         else {
           var response = JSON.parse(xml.responseText);
           var table = document.getElementById('info');
+
           var div = document.createElement('div');
-          var ul = document.createElement('ul');
-          var h = document.createElement('H2');
           div.setAttribute('class','card');
           div.setAttribute('id', counter);
+          
+          var ul = document.createElement('ul');
+          var h = document.createElement('H2');
+
 
           var deleteButton = document.createElement('input');
           deleteButton.setAttribute('value', 'Delete');
