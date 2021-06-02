@@ -47,6 +47,7 @@ function Button(){
           var response = JSON.parse(xml.responseText);
           // enable calculate button only if xml status is good
           document.getElementById("calculate").disabled = false;
+          document.getElementById("amount").disabled = false;
           let total = 0;
           name = city.toUpperCase() + ', ' + state;
           let rates = name + ': \r\n';
@@ -66,6 +67,7 @@ function Button(){
 
             document.getElementById('rate').value = total; 
             document.getElementById('showtax').textContent = rates;
+            document.getElementById('showtax').style.visibility = 'visible'
 
           }
 
@@ -76,12 +78,14 @@ function Button(){
             stateRate = total
             name = state;
             document.getElementById('rate').value = total 
-            document.getElementById('showtax').textContent = 'City does not exist, showing state tax rate instead. \r\n> State: ' + total + '%';
+            document.getElementById('showtax').textContent = 'City does not exist.\r\n' + state + '\r\n> State: ' + total + '%';
+            document.getElementById('showtax').style.visibility = 'visible'
 
           }
         } 
         else {
           document.getElementById('showtax').textContent = JSON.parse(xml.responseText);
+          document.getElementById('showtax').style.visibility = 'visible'
         }
     });
 
@@ -93,12 +97,18 @@ function Button(){
 function Calculate(){
   checkAdvancedRate()
   mode = document.getElementById('mode').value
+  document.getElementById("calculate").disabled = true;
+  document.getElementById("calculate").setAttribute('value', 'Calculating Data...')
   if (mode == 'Exclude'){
     CalcExlude()
   }
   else if (mode == 'Include'){
     CalcInclude()
   }
+  setTimeout(function(){
+    document.getElementById("calculate").disabled = false;
+    document.getElementById("calculate").setAttribute('value', 'Calculate')
+  }, 300);
 }
 
 
@@ -153,7 +163,7 @@ function CalcExlude(){
     pTotal.style.fontWeight = 'bold';
 
     var h = document.createElement('H2');
-    var hName = document.createTextNode(name)
+    var hName = document.createTextNode(name + ' - ' + (rate*100).toFixed(2) + '%')
     div.setAttribute('class','card');
     div.setAttribute('id', counter);
 
@@ -166,11 +176,19 @@ function CalcExlude(){
     deleteButton.setAttribute('value', 'Delete');
     deleteButton.setAttribute('onclick', 'Delete(' + counter + ')')
     deleteButton.setAttribute('type', 'button')
+    deleteButton.setAttribute('class', 'w3-button w3-black w3-margin-bottom')
+    deleteButton.style.position = "absolute";
+    deleteButton.style.right = '25px'
+    deleteButton.style.bottom = '9px'
 
     var editButton = document.createElement('input');
     editButton.setAttribute('value', 'Edit');
     editButton.setAttribute('onclick', 'Edit(' + counter + ')')
     editButton.setAttribute('type', 'button');
+    editButton.setAttribute('class', 'w3-button w3-black w3-margin-bottom');
+    editButton.style.position = "absolute";
+    editButton.style.right = '110px';
+    editButton.style.bottom = '9px';
 
     var amountInput = document.createElement('input');
     amountInput.setAttribute('type', 'number');
@@ -189,7 +207,9 @@ function CalcExlude(){
     changeButton.setAttribute('onclick', 'ChangeValue(' + counter + ')')
     changeButton.setAttribute('type', 'button');
     changeButton.setAttribute('id', 'changeButton' + counter)
+    changeButton.setAttribute('class', 'w3-button w3-black w3-margin-bottom')
     changeButton.style.visibility = "hidden"
+    changeButton.style.clear = 'left'
 
     var cityTax = document.createElement('input');
     cityTax.setAttribute('type', 'number');
@@ -209,6 +229,12 @@ function CalcExlude(){
     stateTax.setAttribute('value', stateRate);
     stateTax.style.visibility = "hidden"
 
+    var totalTax = document.createElement('input');
+    totalTax.setAttribute('type', 'number');
+    totalTax.setAttribute('id', 'totalTax' + counter);
+    totalTax.setAttribute('value', rate*100);
+    totalTax.style.visibility = "hidden"
+
     var taxMode = document.createElement('input');
     taxMode.setAttribute('type', 'text');
     taxMode.setAttribute('id', 'taxMode' + counter);
@@ -226,12 +252,15 @@ function CalcExlude(){
     div.appendChild(editButton)
     div.appendChild(deleteButton)
     div.style.whiteSpace = "pre";
+    div.style.position = "relative";
     div.appendChild(pSpace)
     div.appendChild(label)
+    div.appendChild(document.createElement('br'))
     div.appendChild(changeButton)
     div.appendChild(cityTax)
     div.appendChild(countyTax)
     div.appendChild(stateTax)
+    div.appendChild(totalTax)
     div.appendChild(taxMode)
     table.insertBefore(div, table.firstChild)
 }
@@ -289,7 +318,7 @@ function CalcInclude(){
     pTotal.style.fontWeight ='bold';
 
     var h = document.createElement('H2');
-    var hName = document.createTextNode(name)
+    var hName = document.createTextNode(name + ' - ' + (rate*100).toFixed(2) + '%')
     div.setAttribute('class','card');
     div.setAttribute('id', counter);
 
@@ -324,6 +353,7 @@ function CalcInclude(){
     changeButton.setAttribute('onclick', 'ChangeValue(' + counter + ')')
     changeButton.setAttribute('type', 'button');
     changeButton.setAttribute('id', 'changeButton' + counter)
+    changeButton.setAttribute('class', 'w3-button w3-black w3-margin-bottom')
     changeButton.style.visibility = "hidden"
 
     var cityTax = document.createElement('input');
@@ -372,6 +402,7 @@ function CalcInclude(){
 }
 
 function Clear(){
+  document.getElementById('city').value = '';
   document.getElementById('showtax').textContent = '';
   document.getElementById('amount').value = '';
   document.getElementById('rate').value = '';
@@ -424,7 +455,7 @@ function ChangeValExclude(el){
   var cityTax = parseFloat(document.getElementById('cityTax' + el).value)
   var countyTax = parseFloat(document.getElementById('countyTax' + el).value)
   var stateTax = parseFloat(document.getElementById('stateTax' + el).value)
-  var rate = (cityTax + countyTax + stateTax)/100
+  var rate = parseFloat(document.getElementById('totalTax' + el).value)/100
   var textTax = document.createTextNode('Sales Tax = $' + (amount*rate).toFixed(2))
   var textTotal = document.createTextNode('Total (with Tax) = $' + (amount*(1+rate)).toFixed(2))
   var textAmount = document.createTextNode('Original Amount = $' + amount)
@@ -500,32 +531,47 @@ function ChangeValInclude(el){
 
 
 
-function changeMode(){
-  element = document.getElementById('modeChange');
+function baseMode(){
+    Clear()
+    rateInput = document.getElementById('rate');
+    calculateButton = document.getElementById('calculate');
+    advancedLabel = document.getElementById('advancedlabel');
+    advancedCheckBox = document.getElementById('advanced');
+    advancedMode = document.getElementById('advancedMode')
+
+    document.getElementById('showtax').style.visibility = "hidden"
+    document.getElementById('baseMode').disabled = true
+    document.getElementById('customMode').disabled = false
+
+    rateInput.disabled = true;
+    calculateButton = true;
+    document.getElementById('amount').disabled = true;
+    advancedLabel.style.display = "none";
+    advancedMode.style.display = "none";
+    advancedCheckBox.checked = false;
+    show = document.getElementById('cityMode');
+    show.style.display = ""
+}
+
+function customMode(){
+  Clear()
   rateInput = document.getElementById('rate');
   calculateButton = document.getElementById('calculate');
   advancedLabel = document.getElementById('advancedlabel');
   advancedCheckBox = document.getElementById('advanced');
-  Clear()
-  if (element.textContent == 'Custom'){
-    element.innerHTML = 'City';
-    name = 'Custom'
-    rateInput.disabled = false;
-    calculateButton.disabled = false;
-    advancedLabel.style.visibility = "visible";
-    hide = document.getElementById('cityMode');
-    hide.style.display = 'none'
-  } 
-  else if (element.textContent == 'City'){
-    element.innerHTML = 'Custom';
-    rateInput.disabled = true;
-    calculateButton = true;
-    advancedLabel.style.visibility = "hidden";
-    advancedCheckBox.checked = false;
-    show = document.getElementById('cityMode');
-    show.style.display = ''
-  } 
+
+  document.getElementById('amount').disabled = false;
+  document.getElementById('baseMode').disabled = false
+  document.getElementById('customMode').disabled = true
+
+  name = 'Custom'
+  rateInput.disabled = false;
+  calculateButton.disabled = false;
+  advancedLabel.style.display = "";
+  hide = document.getElementById('cityMode');
+  hide.style.display = "none"
 }
+
 
 function showAdvancedFunctions(){
   advancedCheckBox = document.getElementById('advanced');
@@ -550,4 +596,44 @@ function checkAdvancedRate(){
     totalRate = cityRate + countyRate + stateRate;
     document.getElementById('rate').value = totalRate;
   }
+}
+
+
+function findSalesTaxTable(){
+  element = document.getElementById('stateTaxLookUp')
+  if (element.value == 'false'){
+    var xml = new XMLHttpRequest();
+    let text = {city:'null', state:'null'};
+    xml.open('POST', 'http://127.0.0.1:5000/salestaxtabledata', true);
+    xml.setRequestHeader('Content-Type', 'application/json');
+    xml.addEventListener('load', function(){
+        if(xml.status >= 200 && xml.status < 400){
+          var response = JSON.parse(xml.responseText);
+          if (xml.status == 201){
+            document.getElementById('salesTaxTable').innerHTML = response['table']; 
+            document.getElementById('salesTaxTableView').style.display = "";
+          }
+
+          else if(xml.status == 230){
+            document.getElementById('salesTaxTable').innerHTML = response
+            document.getElementById('salesTaxTableView').style.display = "";
+          }
+        } 
+        else {
+          document.getElementById('salesTaxTable').innerHTML = JSON.parse(xml.responseText);
+          document.getElementById('salesTaxTableView').style.display = "";
+        }
+    });
+    xml.send(JSON.stringify(text));
+    event.preventDefault();
+  }
+
+  else{
+    document.getElementById('salesTaxTableView').style.display = "";
+  }
+  element.value = 'true'
+}
+
+function hideTable(){
+  document.getElementById('salesTaxTableView').style.display = "none";
 }

@@ -49,23 +49,6 @@ app.get('/',function(req,res){
   	}
   }
   	var context = {dataList:null}
- //  	let text = {city:null, state:null}
- //  if (typeof city != "undefined" && typeof state != "undefined"){
-	// var xml = new XMLHttpRequest();
-
-	// text.city = city
-	// text.state = state
-	// xml.open('POST', 'http://127.0.0.1:5000/', true);
-	// xml.setRequestHeader('Content-Type', 'application/json');
-	// xml.send(JSON.stringify(text));
-	// xml.onreadystatechange = function () {
-	// if(xml.readyState == 4 && xml.status >= 200 && xml.status < 400){
-	// 	var response = JSON.parse(xml.responseText);
-	// 	context.dataList = response
-	// } 
-	// else {
-	// 	console.log("Error in network request: ")
-	// }}}
 	
   res.render('home')
 });

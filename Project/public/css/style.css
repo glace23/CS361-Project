@@ -13,66 +13,6 @@
   border-width: 5px
 }
 
-.show {
-  color: #f2f2f2;
-  font-size: 25px;
-  padding: 8px 12px;
-}
-
-.submit{
-  width: 15em;  
-  height: 2em;
-
-}
-
-.comments{
-  padding: 50px;
-}
-
-.direct{
-  padding: 50px;
-}
-
-
-.cm{
-  border-top-style: double;
-  border-color: #b5656d;
-  border-width: 5px;
-  color: #f2f2f2;
-  font-size: 25px;
-  padding: 50px 12px;
-}
-
-
-/* Header/Blog Title */
-.header {
-  padding: 30px;
-  font-size: 40px;
-  text-align: center;
-  background: #ddd;
-}
-
-/* Create two unequal columns that floats next to each other */
-/* Left column */
-.leftcolumn {
-  float: left;
-  width: 75%;
-}
-
-/* Right column */
-.rightcolumn {
-  float: left;
-  width: 25%;
-  padding-left: 20px;
-}
-
-/* Fake image */
-.fakeimg {
-  background-color: #aaa;
-  width: 100%;
-  padding: 20px;
-}
-
 /* Add a card effect for articles */
 .card {
   background-color: white;

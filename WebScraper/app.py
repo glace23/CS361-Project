@@ -5,6 +5,7 @@ from flask_cors import CORS
 import tax
 import city
 import cityintro
+import taxtable
 
 app = Flask(__name__)
 CORS(app)
@@ -28,7 +29,7 @@ def output_xml(data, code, headers=None):
 api.add_resource(city.City, '/citydata')
 api.add_resource(tax.Tax, '/taxdata')
 api.add_resource(cityintro.CityText, '/citytextdata')
-
+api.add_resource(taxtable.SalesTaxTable, '/salestaxtabledata')
 
 if __name__ == "__main__":
     app.run()

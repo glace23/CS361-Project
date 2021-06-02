@@ -1,128 +1,171 @@
-<button id='modeChange' class="showButton" onclick = "changeMode()">Custom</button>
-<div id='cityMode'>
-  <form>
-  <fieldset>
-    <legend class="tooltip">Add a city!
-      <span class="tooltiptext">
-      <p>Add a city and a state, you will see a break down of sales tax in City, County, State</p>
-      <p>If the city you entered does not exist, the application prompt you and only show a State sales tax</p>
-      </span>
-    </legend>
-    <label class="show">City:
-        <input type="text" name="city" id="city">
-    </label>
-    <label class="show">State:
-        <select name="state" id="state" style="font-size:25px" onchange="checkDC(event)">
-          <option value="AL">AL</option>
-          <option value="AK">AK</option>
-          <option value="AR">AR</option>  
-          <option value="AZ">AZ</option>
-          <option value="CA">CA</option>
-          <option value="CO">CO</option>
-          <option value="CT">CT</option>
-          <option value="DC">DC</option>
-          <option value="DE">DE</option>
-          <option value="FL">FL</option>
-          <option value="GA">GA</option>
-          <option value="HI">HI</option>
-          <option value="IA">IA</option>  
-          <option value="ID">ID</option>
-          <option value="IL">IL</option>
-          <option value="IN">IN</option>
-          <option value="KS">KS</option>
-          <option value="KY">KY</option>
-          <option value="LA">LA</option>
-          <option value="MA">MA</option>
-          <option value="MD">MD</option>
-          <option value="ME">ME</option>
-          <option value="MI">MI</option>
-          <option value="MN">MN</option>
-          <option value="MO">MO</option>  
-          <option value="MS">MS</option>
-          <option value="MT">MT</option>
-          <option value="NC">NC</option>  
-          <option value="NE">NE</option>
-          <option value="NH">NH</option>
-          <option value="NJ">NJ</option>
-          <option value="NM">NM</option>      
-          <option value="NV">NV</option>
-          <option value="NY">NY</option>
-          <option value="ND">ND</option>
-          <option value="OH">OH</option>
-          <option value="OK">OK</option>
-          <option value="OR">OR</option>
-          <option value="PA">PA</option>
-          <option value="RI">RI</option>
-          <option value="SC">SC</option>
-          <option value="SD">SD</option>
-          <option value="TN">TN</option>
-          <option value="TX">TX</option>
-          <option value="UT">UT</option>
-          <option value="VT">VT</option>
-          <option value="VA">VA</option>
-          <option value="WA">WA</option>
-          <option value="WI">WI</option>  
-          <option value="WV">WV</option>
-          <option value="WY">WY</option>
-      </select>
-    </label>
-    <br>
-    <br>
-    <input type="button" id="add" value = "Add" class="add" onclick="addCity()">
-  </fieldset>
-  </form>
-
-  <p id='showtax' class ='banner' style="background-color:#FFF; color:black; font-size:20px; white-space: pre;"></p>
+<div class="w3-container w3-padding-large w3-dark-grey w3-section w3-bottombar w3-padding-16" style="position:relative;">
+  <button id="baseMode" class="w3-button w3-teal w3-margin-bottom" onclick = "baseMode()" disabled>Base</button>
+  <button id="customMode" class="w3-button w3-teal w3-margin-bottom" onclick = "customMode()">Custom</button>
+  <button id="stateTaxLookUp" class="w3-button w3-blue-grey w3-margin-bottom" value="false" onclick="findSalesTaxTable()" style="position:absolute; right:150px;">State Tax Look Up</button>
+  <button id="clear" class="w3-button w3-deep-purple w3-margin-bottom" onclick="Clear()" style="position:absolute; right:25px">Clear Form</button>
+</div>
+<div id="salesTaxTableView" class="w3-container w3-padding-large w3-blue-grey w3-section w3-bottombar w3-padding-16" style="position:relative; display:none;">
+  <button id="hideTable" class="w3-button w3-deep-purple w3-margin-bottom" onclick = "hideTable()" style="position:absolute; right:25px;">Hide Table</button>
+  <div id="salesTaxTable" style="position:relative; pointer-events:none;">
+  </div>
 </div>
 
-  <form>
-  <fieldset>
-  <legend class="tooltip">Tax Calculator
+  <div id="cityMode" class="w3-container w3-padding-large w3-grey w3-section w3-bottombar w3-padding-16" style="position:relative">
+    <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
+      <div class="w3-third w3-lime w3-text-dark-grey" style="font-size:25px">
+        <p>Add a City!</p> 
+      </div>
+      <div class="w3-third w3-amber w3-text-dark-grey tooltip" style="width:100px; left:10px">
+        <p>Help</p> 
+        <span class="tooltiptext">
+          <p>Add a city and a state, you will see a break down of sales tax in City, County, State</p>
+          <p>If the city you entered does not exist, the application prompt you and only show a State sales tax</p>
+        </span>
+      </div>
+    </div>
+
+      <hr class="w3-opacity">
+      <div id="showtax" class ="w3-container w3-padding-large w3-teal" style="font-size:20px; white-space: pre; right:50%; float:right; visibility:hidden"></div>
+        <div class="w3-section">
+          <label>City:
+              <input type="text" name="city" id="city">
+          </label>
+        </div>
+        <div class="w3-section">
+          <label>State:
+              <select name="state" id="state" onchange="checkDC(event)">
+                <option value="AL">AL</option>
+                <option value="AK">AK</option>
+                <option value="AR">AR</option>  
+                <option value="AZ">AZ</option>
+                <option value="CA">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+                <option value="DC">DC</option>
+                <option value="DE">DE</option>
+                <option value="FL">FL</option>
+                <option value="GA">GA</option>
+                <option value="HI">HI</option>
+                <option value="IA">IA</option>  
+                <option value="ID">ID</option>
+                <option value="IL">IL</option>
+                <option value="IN">IN</option>
+                <option value="KS">KS</option>
+                <option value="KY">KY</option>
+                <option value="LA">LA</option>
+                <option value="MA">MA</option>
+                <option value="MD">MD</option>
+                <option value="ME">ME</option>
+                <option value="MI">MI</option>
+                <option value="MN">MN</option>
+                <option value="MO">MO</option>  
+                <option value="MS">MS</option>
+                <option value="MT">MT</option>
+                <option value="NC">NC</option>  
+                <option value="NE">NE</option>
+                <option value="NH">NH</option>
+                <option value="NJ">NJ</option>
+                <option value="NM">NM</option>      
+                <option value="NV">NV</option>
+                <option value="NY">NY</option>
+                <option value="ND">ND</option>
+                <option value="OH">OH</option>
+                <option value="OK">OK</option>
+                <option value="OR">OR</option>
+                <option value="PA">PA</option>
+                <option value="RI">RI</option>
+                <option value="SC">SC</option>
+                <option value="SD">SD</option>
+                <option value="TN">TN</option>
+                <option value="TX">TX</option>
+                <option value="UT">UT</option>
+                <option value="VT">VT</option>
+                <option value="VA">VA</option>
+                <option value="WA">WA</option>
+                <option value="WI">WI</option>  
+                <option value="WV">WV</option>
+                <option value="WY">WY</option>
+            </select>
+          </label>
+        </div>
+      </hr>
+      <input type="button" id="add" value = "Add" class="w3-button w3-black w3-margin-bottom" onclick="addCity()">
+  </div>
+
+
+
+
+<div class="w3-container w3-padding-large w3-grey" style="position:relative">
+  <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
+    <div class="w3-third w3-lime w3-text-dark-grey" style="font-size:25px">
+      <p>Tax Calculator</p> 
+    </div>
+    <div class="w3-third w3-amber w3-text-dark-grey tooltip" style="width:100px; left:10px">
+      <p>Help</p> 
       <span class="tooltiptext">
-      <p>Dollar Amount must be larger than 0.</p>
-      <p>Sales Tax rate will be pre-populated</p>
-      <p>Modes:
-      <br>Excluding Taxes: Assumes the amount you entered does not include sales tax.</br> 
-      <br>Including Taxes: Assumes the amount you entered includes sales tax.</br></p>
+        <p>Dollar Amount must be larger than 0.</p>
+        <p>Sales Tax rate will be automatically populated under base mode.
+        <br>Sales Tax must not be negative in custom mode</p>
+        <p>Modes:
+        <br>Excluding Taxes: Assumes the amount you entered does not include sales tax.</br> 
+        <br>Including Taxes: Assumes the amount you entered includes sales tax.</br></p>
       </span>
-  </legend>
-    <label class="show">Dollar Amount: $
-        <input type="number" name="amount" id="amount">
-    </label>
-    <label class="show">Tax Rate:
-        <input type="number" name="rate" id="rate" disabled>
-        %
-    </label>
-      <label class="show" for="language">Mode:
-        <select id="mode" name="mode" style="font-size:25px">
+    </div>
+  </div>
+
+  <hr class="w3-opacity">
+    <div class="w3-section">
+      <label>Dollar Amount: $
+          <input type="number" name="amount" id="amount" disabled>
+      </label>
+    </div>
+    <div class="w3-section">
+      <label>Tax Rate:
+          <input type="number" name="rate" id="rate" disabled>
+          %
+      </label>
+    </div>
+    <div class="w3-section">
+      <label>Mode:
+        <select id="mode" name="mode">
           <option value="Exclude">Exclude Tax</option>
           <option value="Include">Include Tax</option>
-      </select>
-    </label>
-    <label for="advanced" class="show" id="advancedlabel" style="visibility:hidden">
-      <input type="checkbox" id="advanced" value="advanced" onclick="showAdvancedFunctions()">
-      Advanced Mode
-    </label>
-    <div id="advancedMode" style="display:none">
-        <label class="show">City Rate:
-        <input type="number" name="cityRate" id="cityRate">
-        %
-        </label>
-        <label class="show">County Rate:
-        <input type="number" name="countyRate" id="countyRate">
-        %
-        </label>
-        <label class="show">State Rate:
-        <input type="number" name="stateRate" id="stateRate">
-        %
-        </label>
+        </select>
+      </label>
     </div>
-    <br>
-    <br>
-    <input type="button" id="calculate" value = "Calculate" class="add" onclick="Calculate()" disabled>
-    <input type="button" id="clear" value = "Clear Form" class="add" onclick="Clear()">
-  </fieldset>
-  </form>
+    <div class="w3-section">
+      <label for="advanced" id="advancedlabel" style="display:none; padding: 5px" class="w3-red">
+        <input type="checkbox" id="advanced" value="advanced" onclick="showAdvancedFunctions()">
+        Advanced Mode
+      </label>
+    </div>
 
-<div id ='info'></div>
+    <div id="advancedMode" class="w3-container w3-padding-large w3-teal" style="display:none">
+      <div class="w3-section">
+        <label>City Rate:
+          <input type="number" name="cityRate" id="cityRate">
+          %
+        </label>
+      </div>
+      <div class="w3-section">
+        <label>County Rate:
+          <input type="number" name="countyRate" id="countyRate">
+          %
+        </label>
+      </div>
+      <div class="w3-section">
+        <label>State Rate:
+          <input type="number" name="stateRate" id="stateRate">
+          %
+        </label>
+      </div>
+    </div>
+
+      <input type="button" id="calculate" value = "Calculate" class="w3-button w3-black w3-margin-bottom" onclick="Calculate()" disabled>
+  </hr>
+</div>
+
+<div class="w3-section w3-bottombar w3-padding-16"></div>
+
+<div id ="info"></div>
  <script type="text/javascript" src="showscript"></script>
