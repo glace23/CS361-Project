@@ -237,3 +237,34 @@ If unable to find html label "\<p>"
 Status Code: 404
 Response: "City does not have text content"
 ```
+
+### Sales tax table Scraper - url/citytextdata
+Send any data via post request:
+```
+{
+  ...
+}
+```
+
+Returns
+
+```
+Status Code: 201
+
+Response:
+{
+  "table": <html code of table>
+}
+```
+
+If unable to find page
+```
+Status Code: 404
+Response: "Page does not exist"
+```
+
+If unable to find html label "\<p>"
+```
+Status Code: 404
+Response: "Tax table does exist"
+```
