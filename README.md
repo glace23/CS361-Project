@@ -263,7 +263,7 @@ Status Code: 404
 Response: "Page does not exist"
 ```
 
-If unable to find html label "\<p>"
+If unable to find html label "\<table>"
 ```
 Status Code: 404
 Response: "Tax table does exist"
