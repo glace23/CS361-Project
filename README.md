@@ -238,7 +238,7 @@ Status Code: 404
 Response: "City does not have text content"
 ```
 
-### Sales tax table Scraper - url/citytextdata
+### Sales tax table Scraper - url/salestaxtabledata
 Send any data via post request:
 ```
 {
