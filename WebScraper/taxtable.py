@@ -21,7 +21,7 @@ class SalesTaxTable(Resource):
         if code == 300:
             return 'Page does not exist', 404
         elif code == 250:
-            return 'City does not have text content', 404
+            return 'Tax table does exist', 404
 
         return code, 201
 
