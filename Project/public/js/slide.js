@@ -52,7 +52,10 @@ function Button(){
           deleteButton.setAttribute('value', 'Delete');
           deleteButton.setAttribute('onclick', 'Delete(' + counter + ')')
           deleteButton.setAttribute('type', 'button')
-
+          deleteButton.setAttribute('class', 'w3-button w3-black w3-margin-bottom')
+          deleteButton.style.position = 'absolute';
+          deleteButton.style.bottom = '9px';
+          deleteButton.style.right = '25px';
 
           if (typeof response != 'string'){
             var t = document.createTextNode(city.toUpperCase() + ', ' + state);
@@ -84,7 +87,7 @@ function Button(){
           var div = document.createElement('div');
           div.setAttribute('class','card');
           div.setAttribute('id', counter);
-          
+
           var ul = document.createElement('ul');
           var h = document.createElement('H2');
 
@@ -93,6 +96,8 @@ function Button(){
           deleteButton.setAttribute('value', 'Delete');
           deleteButton.setAttribute('onclick', 'Delete(' + counter + ')')
           deleteButton.setAttribute('type', 'button')
+          deleteButton.setAttribute('class', 'w3-button w3-black w3-margin-bottom');
+
 
           let translated = Language(language, response)
           var t = document.createTextNode(translated);
@@ -101,6 +106,9 @@ function Button(){
           div.appendChild(h)
           div.appendChild(ul);
           div.appendChild(deleteButton)
+          deleteButton.style.position = 'absolute';
+          deleteButton.style.bottom = '9px';
+          deleteButton.style.right = '25px';
           table.insertBefore(div, table.firstChild)
 
         }
@@ -132,6 +140,11 @@ function Language(language, text){
 }
 
 function Delete(el){
+  /*
+  Function deletes the card that the user selects to delete
+  */
+  // locate card by id number
   var element = document.getElementById(el);
+  // delete card
   element.parentNode.removeChild(element);
 }

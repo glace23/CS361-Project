@@ -1,82 +1,94 @@
-<form>
-<fieldset>
-  <legend class="tooltip">Add a city! 
-    <span class="tooltiptext">
-    <p>Add a city, a state, and a language of your choice to see a brief introduction!</p>
-    <p>If you choose a language other than English, the application will translate the brief introduction to the corresponding language!</p>
-    </span>
-  </legend>
-  <label class="show">City:
-      <input type="text" name="city" id="city">
-  </label>
-  <label class="show">State:
+<div class="w3-container w3-padding-large w3-grey">
 
-      <select name="state" id="state" style="font-size:25px" onchange="checkDC(event)">
-        <option value="AL">AL</option>
-        <option value="AK">AK</option>
-        <option value="AR">AR</option>  
-        <option value="AZ">AZ</option>
-        <option value="CA">CA</option>
-        <option value="CO">CO</option>
-        <option value="CT">CT</option>
-        <option value="DC">DC</option>
-        <option value="DE">DE</option>
-        <option value="FL">FL</option>
-        <option value="GA">GA</option>
-        <option value="HI">HI</option>
-        <option value="IA">IA</option>  
-        <option value="ID">ID</option>
-        <option value="IL">IL</option>
-        <option value="IN">IN</option>
-        <option value="KS">KS</option>
-        <option value="KY">KY</option>
-        <option value="LA">LA</option>
-        <option value="MA">MA</option>
-        <option value="MD">MD</option>
-        <option value="ME">ME</option>
-        <option value="MI">MI</option>
-        <option value="MN">MN</option>
-        <option value="MO">MO</option>  
-        <option value="MS">MS</option>
-        <option value="MT">MT</option>
-        <option value="NC">NC</option>  
-        <option value="NE">NE</option>
-        <option value="NH">NH</option>
-        <option value="NJ">NJ</option>
-        <option value="NM">NM</option>      
-        <option value="NV">NV</option>
-        <option value="NY">NY</option>
-        <option value="ND">ND</option>
-        <option value="OH">OH</option>
-        <option value="OK">OK</option>
-        <option value="OR">OR</option>
-        <option value="PA">PA</option>
-        <option value="RI">RI</option>
-        <option value="SC">SC</option>
-        <option value="SD">SD</option>
-        <option value="TN">TN</option>
-        <option value="TX">TX</option>
-        <option value="UT">UT</option>
-        <option value="VT">VT</option>
-        <option value="VA">VA</option>
-        <option value="WA">WA</option>
-        <option value="WI">WI</option>  
-        <option value="WV">WV</option>
-        <option value="WY">WY</option>
-    </select>
-  </label>
-    </label>
-  <label class="show" for="language">Translate:
-      <select id="language" name="language" style="font-size:25px">
-        <option value="English">English</option>
-        <option value="Spanish">Spanish</option>
-        <option value="French">French</option>  
-    </select>
-  </label>
-  <br>
-  <br>
-  <input type="button" id="add" value = "Add" class="add" onclick="addCity()">
-</fieldset>
-</form>
+  <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
+    <div class="w3-third w3-lime w3-text-dark-grey" style="font-size:25px">
+      <p>Add a City!</p> 
+    </div>
+    <div class="w3-third w3-amber w3-text-dark-grey tooltip" style="width:100px; left:10px">
+      <p>Help</p> 
+      <span class="tooltiptext">
+        <p>Add a city, a state, and a language of your choice to see a brief introduction!</p>
+        <p>If you choose a language other than English, the application will translate the brief introduction to the corresponding language!</p>
+      </span>
+    </div>
+  </div>
+
+    <hr class="w3-opacity">
+      <div class="w3-section">
+        <label>City:
+            <input type="text" name="city" id="city">
+        </label>
+      </div>
+      <div class="w3-section">
+        <label>State:
+            <select name="state" id="state" onchange="checkDC(event)">
+              <option value="AL">AL</option>
+              <option value="AK">AK</option>
+              <option value="AR">AR</option>  
+              <option value="AZ">AZ</option>
+              <option value="CA">CA</option>
+              <option value="CO">CO</option>
+              <option value="CT">CT</option>
+              <option value="DC">DC</option>
+              <option value="DE">DE</option>
+              <option value="FL">FL</option>
+              <option value="GA">GA</option>
+              <option value="HI">HI</option>
+              <option value="IA">IA</option>  
+              <option value="ID">ID</option>
+              <option value="IL">IL</option>
+              <option value="IN">IN</option>
+              <option value="KS">KS</option>
+              <option value="KY">KY</option>
+              <option value="LA">LA</option>
+              <option value="MA">MA</option>
+              <option value="MD">MD</option>
+              <option value="ME">ME</option>
+              <option value="MI">MI</option>
+              <option value="MN">MN</option>
+              <option value="MO">MO</option>  
+              <option value="MS">MS</option>
+              <option value="MT">MT</option>
+              <option value="NC">NC</option>  
+              <option value="NE">NE</option>
+              <option value="NH">NH</option>
+              <option value="NJ">NJ</option>
+              <option value="NM">NM</option>      
+              <option value="NV">NV</option>
+              <option value="NY">NY</option>
+              <option value="ND">ND</option>
+              <option value="OH">OH</option>
+              <option value="OK">OK</option>
+              <option value="OR">OR</option>
+              <option value="PA">PA</option>
+              <option value="RI">RI</option>
+              <option value="SC">SC</option>
+              <option value="SD">SD</option>
+              <option value="TN">TN</option>
+              <option value="TX">TX</option>
+              <option value="UT">UT</option>
+              <option value="VT">VT</option>
+              <option value="VA">VA</option>
+              <option value="WA">WA</option>
+              <option value="WI">WI</option>  
+              <option value="WV">WV</option>
+              <option value="WY">WY</option>
+          </select>
+        </label>
+      </div>
+      <div class="w3-section">
+        <label>Translate:
+            <select id="language" name="language">
+              <option value="English">English</option>
+              <option value="Spanish">Spanish</option>
+              <option value="French">French</option>  
+          </select>
+        </label>
+      </div>
+    </hr>
+    <input type="button" id="add" value = "Add" class="w3-button w3-black w3-margin-bottom" onclick="addCity()">
+</div>
+
 <div id ='info'></div>
- <script type="text/javascript" src="homescript"></script>
+
+<script type="text/javascript" src="homescript"></script>
