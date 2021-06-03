@@ -5,54 +5,27 @@
     <title>title</title>
     <link rel="stylesheet" href="css" type="text/css">
   </head>
-<body class="w3-light-grey w3-content" style="max-width:1600px">
+  <body class="w3-light-grey w3-content" style="max-width:1600px">
 
-<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
-  <div class="w3-container">
-    <h4><b>PORTFOLIO</b></h4>
-  </div>
-  <div class="w3-bar-block">
-    <a href="/" id="home" name="naviElement" class="w3-bar-item w3-button w3-padding"><i class="w3-margin-right"></i>Home</a> 
-    <a href="calc" id="calculator" name="naviElement" class="w3-bar-item w3-button w3-padding"><i class="w3-margin-right"></i>Calculator</a> 
-  </div>
-  <div class="w3-panel w3-large">
-    <a id = "email" href="mailto:lisco@oregonstate.edu"><i class="fa fa-facebook-official w3-hover-opacity" style="position: absolute; bottom: 10%">lisco@oregonstate.edu</i></a>
-    <p class="w3-text-grey" style="position: absolute; bottom: 3%">Template by W3.CSS</p>
-  </div>
-</nav>
+  <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+    <div class="w3-container">
+      <h4><b>CS361 Project</b></h4>
+    </div>
+    <div class="w3-bar-block">
+      <a href="/" id="home" name="naviElement" class="w3-bar-item w3-button w3-padding"><i class="w3-margin-right"></i>Home</a> 
+      <a href="calc" id="calculator" name="naviElement" class="w3-bar-item w3-button w3-padding"><i class="w3-margin-right"></i>Calculator</a> 
+    </div>
+    <div class="w3-panel w3-large">
+      <a id = "email" href="mailto:lisco@oregonstate.edu"><i class="fa fa-facebook-official w3-hover-opacity" style="position: absolute; bottom: 10%">lisco@oregonstate.edu</i></a>
+      <p class="w3-text-grey" style="position: absolute; bottom: 3%">Template by W3.CSS</p>
+    </div>
+  </nav>
 
-<script>
-  if(location.pathname=="/") { 
-    document.getElementById("home").classList.add("w3-text-white");
-    document.getElementById("home").classList.add("w3-teal");
-  };
-  if(location.pathname=="/calc") { 
-    document.getElementById("calculator").classList.add("w3-text-white");
-    document.getElementById("calculator").classList.add("w3-teal");
-  };
-
-  function clearHighlight(){
-    document.getElementById("home").classList.remove("w3-text-teal");
-    document.getElementById("calculator").classList.remove("w3-text-teal");
-  }
-
-  document.getElementById("home").addEventListener("click", function(){
-    clearHighlight();
-    document.getElementById("home").classList.add("w3-text-teal");
-  });
-  document.getElementById("calculator").addEventListener("click", function(){
-    clearHighlight();
-    document.getElementById("calculator").classList.add("w3-text-teal");
-  });
-
-</script>
+  <script type="text/javascript" src="naviscript"></script>
 
 
-  <div class="w3-main" style="margin-left:300px">
-    {{{body}}}
-  </div>
-
-
-
-</body>
+    <div class="w3-main" style="margin-left:300px">
+      {{{body}}}
+    </div>
+  </body>
 </html>

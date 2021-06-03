@@ -2,7 +2,7 @@
   <button id="baseMode" class="w3-button w3-teal w3-margin-bottom" onclick = "baseMode()" disabled>Base</button>
   <button id="customMode" class="w3-button w3-teal w3-margin-bottom" onclick = "customMode()">Custom</button>
   <button id="stateTaxLookUp" class="w3-button w3-blue-grey w3-margin-bottom" value="false" onclick="findSalesTaxTable()" style="position:absolute; right:150px;">State Tax Look Up</button>
-  <button id="clear" class="w3-button w3-deep-purple w3-margin-bottom" onclick="Clear()" style="position:absolute; right:25px">Clear Form</button>
+  <button id="clear" class="w3-button w3-deep-purple w3-margin-bottom" onclick="ClearForm()" style="position:absolute; right:25px">Clear Form</button>
 </div>
 <div id="salesTaxTableView" class="w3-container w3-padding-large w3-blue-grey w3-section w3-bottombar w3-padding-16" style="position:relative; display:none;">
   <button id="hideTable" class="w3-button w3-deep-purple w3-margin-bottom" onclick = "hideTable()" style="position:absolute; right:25px;">Hide Table</button>
@@ -134,9 +134,12 @@
       </label>
     </div>
     <div class="w3-section">
-      <label for="advanced" id="advancedlabel" style="display:none; padding: 5px" class="w3-red">
+      <label for="advanced" id="advancedlabel" class="w3-red tooltip" style="display:none; padding: 5px; font-size:15px;">
         <input type="checkbox" id="advanced" value="advanced" onclick="showAdvancedFunctions()">
         Advanced Mode
+        <span class="tooltiptext">
+          <p>Advanced mode where you can adjust City, County and State tax rates</p>
+      </span>
       </label>
     </div>
 
@@ -161,11 +164,11 @@
       </div>
     </div>
 
-      <input type="button" id="calculate" value = "Calculate" class="w3-button w3-black w3-margin-bottom" onclick="Calculate()" disabled>
+      <input type="button" id="calculate" value = "Calculate" class="w3-button w3-black w3-margin-bottom" onclick="showTaxResults()" disabled>
   </hr>
 </div>
 
 <div class="w3-section w3-bottombar w3-padding-16"></div>
 
 <div id ="info"></div>
- <script type="text/javascript" src="showscript"></script>
+ <script type="text/javascript" src="calculatorscript"></script>

@@ -35,7 +35,7 @@ app.get('/homescript', function(req, res){
     var options = { 
         root: path.join(__dirname + "/public/js") 
     }; 
-    res.sendFile("slide.js", options);
+    res.sendFile("addCity.js", options);
 });
 
 app.get('/',function(req,res){
@@ -54,12 +54,12 @@ app.get('/',function(req,res){
 });
 
 
-//contact
-app.get('/showscript', function(req, res){
+//calculator
+app.get('/calculatorscript', function(req, res){
     var options = { 
         root: path.join(__dirname + "/public/js") 
     }; 
-    res.sendFile("show.js", options);
+    res.sendFile("calculator.js", options);
 });
 
 app.get('/calc',function(req,res){
