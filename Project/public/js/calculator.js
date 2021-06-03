@@ -1,3 +1,4 @@
+var url = "http://127.0.0.1:5000/"
 //Keep track of current sales tax rate and name
 var cityRate = 0
 var countyRate = 0
@@ -61,7 +62,7 @@ function getTaxRateFromCity(){
   if(state == 'DC') {city = 'Washington'};
   text.city = city
   text.state = state
-  xml.open('POST', 'http://127.0.0.1:5000/taxdata', true);
+  xml.open('POST', url + 'taxdata', true);
   xml.setRequestHeader('Content-Type', 'application/json');
   xml.addEventListener('load', function(){
     //Sucess
@@ -525,7 +526,7 @@ function findSalesTaxTable(){
     //intialize post request
     var xml = new XMLHttpRequest();
     let text = {city:'null', state:'null'};
-    xml.open('POST', 'http://127.0.0.1:5000/salestaxtabledata', true);
+    xml.open('POST', url + 'salestaxtabledata', true);
     xml.setRequestHeader('Content-Type', 'application/json');
     xml.addEventListener('load', function(){
       //Success

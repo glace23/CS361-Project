@@ -1,3 +1,6 @@
+var url = "http://127.0.0.1:5000/"
+var translateUrl = "http://flip3.engr.oregonstate.edu:1524/"
+
 // keeps track of element ID
 var IdCounter = 0
 
@@ -55,7 +58,7 @@ function getInfoFromCity(){
   text.city = city
   text.state = state
   IdCounter = IdCounter + 1
-  xml.open('POST', 'http://127.0.0.1:5000/citydata', true);
+  xml.open('POST', url + 'citydata', true);
   xml.setRequestHeader('Content-Type', 'application/json');
   xml.addEventListener('load', function(){
     //Sucessful
@@ -140,21 +143,21 @@ function Language(language, text){
   var xml = new XMLHttpRequest();
   let textToTrans = {"Text":text, "Language":language};
   let translated
-  xml.open('POST', 'http://flip3.engr.oregonstate.edu:1524/language', false);
+  xml.open('POST', translateUrl + 'language', false);
   xml.setRequestHeader('Content-Type', 'application/json');
   xml.addEventListener('load', function(){
     //Successful
     if(xml.status >= 200 && xml.status < 400){
       var response = JSON.parse(xml.responseText);
       translated = response.output
-      return translated
     }
     //Failed
     else{
-      return "Something went wrong with the translation!"
+      translated = "Something went wrong with the translation!"
     }
   });
   xml.send(JSON.stringify(textToTrans));
+  return translated
 }
 
 function Delete(el){

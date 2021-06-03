@@ -38,6 +38,7 @@ app.get('/homescript', function(req, res){
     res.sendFile("addCity.js", options);
 });
 
+
 app.get('/',function(req,res){
 
   for (var name in req.query){
