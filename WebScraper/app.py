@@ -32,4 +32,4 @@ api.add_resource(cityintro.CityText, '/citytextdata')
 api.add_resource(taxtable.SalesTaxTable, '/salestaxtabledata')
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=8081)
