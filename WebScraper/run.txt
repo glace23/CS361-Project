@@ -1,0 +1,14 @@
+Virtual Enviroment:
+virtualenv venv -p $(which python3) 
+source ./venv/bin/activate
+pip3 install --upgrade pip
+pip install -r requirements.txt
+
+Flask:
+source ./venv/bin/activate
+export FLASK_APP=run.py
+python -m flask run -h 0.0.0.0 -p 8042 --reload
+
+Guinicorn:
+pip install guinicorn
+gunicorn -b 0.0.0.0:8042 app:app -D
